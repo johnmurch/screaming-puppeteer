@@ -22,7 +22,6 @@ The output can easily be removed, but wanted a simple way to see the URL it's cr
 # What
 You provide a seed URL and it fetches the URL and then crawls all links (href) on the page, feeds into a queue and repeats. The final output is a text file with one url per line of the hostname you crawled.
 
-If you have any feedback feel free to hit me up [@johnmurch](https://twitter.com/johnmurch) on twitter
 
 # Install
 
@@ -37,3 +36,7 @@ Be sure to change the URL in cluster.js or crawler.js
 OR
 
 ``` node cluster.js```
+
+
+# Enjoy ☕
+If you have any feedback feel free to hit me up [@johnmurch](https://twitter.com/johnmurch) on twitter
