@@ -9,7 +9,7 @@ let sitemap = []; // all URLs
 var visitedURL = []; // tracking the pages that have been crawled
 var links = [];
 const limitCrawl = 1000; // Set Crawl limit as this script is focusing on spidering small sites (could handle larger, but recommend a database (redis) integration for that)
-
+// Because I really only care about "page" URLs and do not want to see images/css in my list
 function isPage(url) {
     if ((url.endsWith('.pdf') || url.endsWith('.png') || url.endsWith('.gif') || url.endsWith('.jpg') || url.endsWith('.jpeg') || url.endsWith('.css')) || (url.indexOf('fonts.googleapis.com') > -1)) {
         return false
@@ -18,10 +18,10 @@ function isPage(url) {
     }
 }
 
-async function run(){
+async function run() {
     const cluster = await Cluster.launch({
         concurrency: Cluster.CONCURRENCY_CONTEXT,
-        maxConcurrency: 4,
+        maxConcurrency: 4, // adjust this down or up depending on hardware
         monitor: false,
     });
     console.time('crawler'); // Start the clock 🕛
@@ -43,9 +43,9 @@ async function run(){
                 }
                 return description
             })
-            if(gotoPage.status()==200){
+            if (gotoPage.status() == 200) {
                 console.log("\x1b[34m%s\x1b[0m", `🤖: ${gotoPage.status()} ${gotoPage.url()}`)
-            }else{ // todo: fix these urls
+            } else { // todo: fix these urls
                 console.log("\x1b[31m%s\x1b[0m", `🤖: ${gotoPage.status()} ${gotoPage.url()}`)
             }
             if (title != "") {
@@ -81,8 +81,8 @@ async function run(){
         }
         visitedURL.push(url);
         uniqueLinks = [...new Set(links)];
-        for await (l of uniqueLinks){
-            if(!sitemap.includes(l)){
+        for await (l of uniqueLinks) {
+            if (!sitemap.includes(l)) {
                 sitemap.push(l)
                 cluster.queue(l)
             }
@@ -96,17 +96,15 @@ async function run(){
 
     cluster.queue(MAIN_URL.href)
 
-
     await cluster.idle();
-    await cluster.close();    
+    await cluster.close();
     sitemap = sitemap.sort() // lets sort so the output is clean!
     console.log('--------------------------------------------------------')
     console.timeEnd('crawler');
     console.info(sitemap.length, ' Pages')
     console.info("URLS", JSON.stringify(sitemap, null, 4))
     console.log('--------------------------------------------------------')
-    // fs.writeFileSync(MAIN_URL.hostname+".txt", sitemap)
     fs.writeFileSync(MAIN_URL.hostname + ".txt", sitemap.join().replace(/,/g, '\n'), () => {});
-  
+
 }
 run();

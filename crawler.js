@@ -48,7 +48,7 @@ async function run() {
         }
         return description
       })
-      console.log("\x1b[34m%s\x1b[0m",`🤖: ${gotoPage.status()} ${gotoPage.url()}`)
+      console.log("\x1b[34m%s\x1b[0m", `🤖: ${gotoPage.status()} ${gotoPage.url()}`)
       if (title != "") {
         console.log("\x1b[32m%s\x1b[0m", `✅: ${title.length}  ${title}`)
       } else {
