@@ -2,5 +2,22 @@
   "dependencies": {
     "puppeteer": "^13.7.0",
     "puppeteer-cluster": "^0.23.0"
-  }
+  },
+  "name": "screaming-puppeteer",
+  "description": "Simple web spider to capture URLs of a domain",
+  "version": "1.0.0",
+  "main": "crawler.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/johnmurch/screaming-puppeteer.git"
+  },
+  "author": "John Murch",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/johnmurch/screaming-puppeteer/issues"
+  },
+  "homepage": "https://github.com/johnmurch/screaming-puppeteer#readme"
 }
