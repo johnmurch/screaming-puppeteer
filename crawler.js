@@ -70,7 +70,7 @@ async function run() {
             href
           }) => href)
         );
-        for (const href of hrefs) {
+        for await (href of hrefs) {
           if (new RegExp('^(https?:\/\/)?' + hostname).test(href)) {
             if (isPage(href)) {
               links.push(href.replace(/#.*/, ''));
