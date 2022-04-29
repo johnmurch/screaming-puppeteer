@@ -17,7 +17,7 @@ They are very similar code bases, but the crawler.js is just a single threaded n
 
 There are pro/cons for each, but wanted to showcase both of them as they are about 100 lines of code and the only real dependency is puppetter and [puppeteer-cluster](https://www.npmjs.com/package/puppeteer-cluster)
 
-The output can easily be removed, but wanted a simple way to see the URL it's crawling, the status code and then the page title and meta description for the page. Additional the time it took to run is outputed at the end above the list of urls.
+The output can easily be removed, but wanted a simple way to see the URL it's crawling, the status code and then the page title (and character length) and meta description for the page. Additional the time it took to run is outputed at the end above the list of urls.
 
 # What
 You provide a seed URL and it fetches the URL and then crawls all links (href) on the page, feeds into a queue and repeats. The final output is a text file with one url per line of the hostname you crawled.
