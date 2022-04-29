@@ -32,6 +32,15 @@ async function run() {
         data: url
     }) => {
         try {
+            await page.setRequestInterception(true);
+            // Ignore assets (CSS, JS, IMAGES) only care about URLs that are "pages"
+            page.on('request', interceptedRequest => {
+              if (isPage(interceptedRequest.url())) {
+                interceptedRequest.continue();
+              } else {
+                interceptedRequest.abort();
+              }
+            });
             gotoPage = await page.goto(url, {
                 waitUntil: ['load', 'domcontentloaded', 'networkidle2']
             });
