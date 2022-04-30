@@ -5,7 +5,7 @@ const {
 const fs = require('fs');
 
 const MAIN_URL = new URL('https://www.johnmurch.com'); // be sure to use the correct URL to start, or it throws an error!
-let sitemap = []; // all URLs
+let sitemap = [MAIN_URL.href]; // all URLs
 var visitedURL = []; // tracking the pages that have been crawled
 var links = [];
 const limitCrawl = 1000; // Set Crawl limit as this script is focusing on spidering small sites (could handle larger, but recommend a database (redis) integration for that)
